@@ -1,0 +1,22 @@
+name: cdv_data_prep
+channels:
+ - conda-forge
+ - defaults
+dependencies:
+ - python == 3.8.5
+ - jupyterlab
+ - ipykernel 
+ - nb_conda_kernels 
+ - numpy 
+ - pandas 
+ - seaborn
+ - matplotlib
+ - altair
+ - streamlit
+ - empyrical-dist
+ - pytest
+ - isort
+ - pre-commit
+ - flake8
+ - pip
+ - vega_datasets
