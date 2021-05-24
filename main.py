@@ -126,13 +126,13 @@ def stats_plot(df: pd.DataFrame, save: bool = False) -> plt:
             save (bool): Create csv file with calculated_set_df. (Default: False)
         Returns: plot (plt)
     """
-    plot = df.plot(kind="bar", figsize=(9.5, 9), grid=True, legend=True,
-                   title="Simple statistics comparison", rot=0)
+    df.plot(kind="bar", figsize=(9.5, 9), grid=True, legend=True,
+            title="Simple statistics comparison", rot=0)
 
     if save:
         plt.savefig("output/stats_plot.jpg")
 
-    return plot
+    return plt.show()
 
 
 def sets_regplot(df: pd.DataFrame, save: bool = False) -> plt:
@@ -172,6 +172,8 @@ def sets_regplot(df: pd.DataFrame, save: bool = False) -> plt:
 
     if save:
         plt.savefig("output/sets_regplot.jpg")
+
+    return plt.show()
 
 
 def main():
