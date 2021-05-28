@@ -26,10 +26,8 @@ def makedir(name: str = "output") -> None:
     Returns: None
     """
 
-    # Maybe add feature to name the directory
     resposne = input(f"Write 'ok' and confirm by hitting ENTER to make {name} dir.\n ")
 
-    # If i don't write ok program will crash because of no 'output folder
     if resposne == "ok":
         try:
             os.makedirs(name)
@@ -39,7 +37,8 @@ def makedir(name: str = "output") -> None:
             print(f"Cannot create a file that already exists: {name}\n")
 
     else:
-        print("Making new directory aborted.\n")  # maybe loop to os.makedir to try to create dir again
+        print("Don't make it harder.\n")
+        makedir()
 
 
 def data_as_anscombe(multi_index: bool = True, save: bool = False) -> pd.DataFrame:
@@ -75,6 +74,25 @@ def data_as_anscombe(multi_index: bool = True, save: bool = False) -> pd.DataFra
     return anscombe_df
 
 
+# why adding func in func when outer func does not affect inner func? Maybe just add save option
+def anscombe_statistics(a: list, b: list, round_it: int = 2) -> list:
+    """
+    Calculates variance, mean, standard deviation and pearson correlation.
+        Parameters:
+            a: (array-like): Values to calculate.
+            b: (array-like): Values 'b' are used only for correlation.
+            round_it (int): Specified number of decimal. (Default: 2)
+        Returns: [var, mean, std, corr] (list)
+    """
+
+    var = round(np.var(a), round_it)
+    mean = round(np.mean(a), round_it)
+    std = round(np.std(a), round_it)
+    corr = round(pearsonr(a, b)[0], round_it)
+
+    return [var, mean, std, corr]
+
+
 def stats_in_frame(df: pd.DataFrame, save: bool = False) -> pd.DataFrame:
     """
     Makes DataFrame from Anscombe quartet's statistics. Uses anscombe_statistics function.
@@ -83,24 +101,6 @@ def stats_in_frame(df: pd.DataFrame, save: bool = False) -> pd.DataFrame:
             save (bool): Create csv file with calculated_stats_df. (Default: False)
         Returns: calculated_stats_df (DataFrame)
     """
-
-    # why adding func in func when outer func does not affect inner func? Maybe just add save option
-    def anscombe_statistics(a: list, b: list, round_it: int = 2) -> list:
-        """
-        Calculates variance, mean, standard deviation and pearson correlation.
-            Parameters:
-                a: (array-like): Values to calculate.
-                b: (array-like): Values 'b' are used only for correlation.
-                round_it (int): Specified number of decimal. (Default: 2)
-            Returns: [var, mean, std, corr] (list)
-        """
-
-        var = round(np.var(a), round_it)
-        mean = round(np.mean(a), round_it)
-        std = round(np.std(a), round_it)
-        corr = round(pearsonr(a, b)[0], round_it)
-
-        return [var, mean, std, corr]
 
     set_i = anscombe_statistics(df["I"]["x1"], df["I"]["y1"], round_it=3)
     set_ii = anscombe_statistics(df["II"]["x2"], df["II"]["y2"], round_it=3)
@@ -144,32 +144,21 @@ def sets_regplot(df: pd.DataFrame, save: bool = False) -> plt:
         Returns: plot (plt)
     """
 
-    # Try loop stay DRY ;)
     fig, axes = plt.subplots(2, 2, figsize=(9.125, 9), sharex="all", sharey="all")
     plt.suptitle("Regression plot for Anscombe's quartet.")
 
     axes[0, 0].set(xlim=(2, 20), ylim=(2, 14))
     axes[0, 0].set(xticks=(range(2, 22, 2)), yticks=(range(2, 16, 2)))
 
-    sns.regplot(x=df["I"]["x1"], y=df["I"]["y1"], ax=axes[0, 0],
-                scatter_kws={"color": "green"}, line_kws={"color": "red"})
-    axes[0, 0].title.set_text("Set I")
-    axes[0, 0].grid()
+    list_x = [df["I"]["x1"], df["II"]["x2"], df["III"]["x3"], df["IV"]["x4"]]
+    list_y = [df["I"]["y1"], df["II"]["y2"], df["III"]["y3"], df["IV"]["y4"]]
+    list_title = ["Set I", "Set II", "Set III", "Set IV"]
+    list_axes = [(0, 0), (0, 1), (1, 0), (1, 1)]
 
-    sns.regplot(x=df["II"]["x2"], y=df["II"]["y2"], ax=axes[0, 1],
-                scatter_kws={"color": "green"}, line_kws={"color": "red"})
-    axes[0, 1].title.set_text("Set II")
-    axes[0, 1].grid()
-
-    sns.regplot(x=df["III"]["x3"], y=df["III"]["y3"], ax=axes[1, 0],
-                scatter_kws={"color": "green"}, line_kws={"color": "red"})
-    axes[1, 0].title.set_text("Set III")
-    axes[1, 0].grid()
-
-    sns.regplot(x=df["IV"]["x4"], y=df["IV"]["y4"], ax=axes[1, 1],
-                scatter_kws={"color": "green"}, line_kws={"color": "red"})
-    axes[1, 1].title.set_text("Set IV")
-    axes[1, 1].grid()
+    for x_ele, y_ele, t_ele, axe_ele in zip(list_x, list_y, list_title, list_axes):
+        sns.regplot(x=x_ele, y=y_ele, ax=axes[axe_ele], scatter_kws={"color": "green"}, line_kws={"color": "red"})
+        axes[axe_ele].title.set_text(t_ele)
+        axes[axe_ele].grid()
 
     if save:
         plt.savefig("output/sets_regplot.jpg")
@@ -182,18 +171,17 @@ def main():
     hello_func()
 
     # new directory for output
-    makedir("output")
+    makedir()
 
     # anscombe's data with simple statistics
-    input("Press any key to see data ")
-    my_anscombe_df = data_as_anscombe(multi_index=True, save=True)  # if multi index will be False line 105 - 108
-    # will not work
+    input("Press any ENTER to see data ")
+    my_anscombe_df = data_as_anscombe(save=True)
     print(my_anscombe_df)
     my_calculated_stats_df = stats_in_frame(my_anscombe_df, save=True)
     print(my_calculated_stats_df)
 
     # bar plot for statistics, regression plot for anscombe's data
-    input("Press any key to see plots ")
+    input("Press any ENTER to see plots ")
     stats_plot(my_calculated_stats_df, save=True)
     sets_regplot(my_anscombe_df, save=True)
 
