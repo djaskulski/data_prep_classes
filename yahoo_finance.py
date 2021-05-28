@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[46]:
+# In[1]:
 
 
 # <!-- Yahoo finance (n)
@@ -22,7 +22,7 @@
 #     
 # https://finance.yahoo.com/quote/CSV/history/?guce_referrer=aHR0cHM6Ly93d3cuZ29vZ2xlLmNvbS8&guce_referrer_sig=AQAAAJjgOLcqSa79X2NVcDfaAsiL9BAHg5RvrFg6uir9MoKK8kw1oCE7Io1rINBuyWaJzgkx4TiRiOL_UMQKHk9Lp2Ne9IZ7hwh-3ettI5wsQEvlI2guv04Y0DrmkdAYNKm_baNDrq-DX0kN7r07wdmeKavlvqjoWZWgGPyncARRyqtG&guccounter=2
 
-# In[47]:
+# In[2]:
 
 
 import re
@@ -33,7 +33,7 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 
 
-# In[48]:
+# In[3]:
 
 
 def get_local_csv(path :str = "houses_data.csv") -> pd.DataFrame:
@@ -53,7 +53,7 @@ def get_local_csv(path :str = "houses_data.csv") -> pd.DataFrame:
     return my_data
 
 
-# In[49]:
+# In[4]:
 
 
 def cut_my_df(source: pd.DataFrame, x: str, y: str, y_rolling=False, x_as_index=False) -> pd.DataFrame:
@@ -83,7 +83,7 @@ def cut_my_df(source: pd.DataFrame, x: str, y: str, y_rolling=False, x_as_index=
     return small_df
 
 
-# In[50]:
+# In[5]:
 
 
 def pd_sns_rolling_mean(source: pd.DataFrame, title: str = "title") -> plt:
@@ -109,7 +109,7 @@ def pd_sns_rolling_mean(source: pd.DataFrame, title: str = "title") -> plt:
     return plt.show()
 
 
-# In[86]:
+# In[6]:
 
 
 def alt_rolling_mean(source: pd.DataFrame) -> plt:
@@ -148,7 +148,7 @@ def alt_rolling_mean(source: pd.DataFrame) -> plt:
     return plot.show()
 
 
-# In[89]:
+# In[7]:
 
 
 def main():
@@ -163,14 +163,14 @@ def main():
     alt_rolling_mean(source=var4)
 
 
-# In[90]:
+# In[8]:
 
 
 if __name__ == "__main__":
     main()
 
 
-# In[54]:
+# In[9]:
 
 
 # !jupyter nbconvert --to python "yahoo_finance.ipynb"
