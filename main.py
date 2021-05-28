@@ -29,6 +29,7 @@ def makedir(name: str = "output") -> None:
     Returns: None
     """
 
+    # Maybe add feature to name the directory
     resposne = input(f"Write 'ok' and confirm by hitting ENTER to make {name} dir.\n ")
 
     if resposne == "ok":
@@ -40,7 +41,7 @@ def makedir(name: str = "output") -> None:
             print(f"Cannot create a file that already exists: {name}\n")
 
     else:
-        print("Making new directory aborted.\n")
+        print("Making new directory aborted.\n")  # maybe loop to os.makedir to try to create dir again
 
 
 def data_as_anscombe(multi_index: bool = True, save: bool = False) -> pd.DataFrame:
@@ -85,6 +86,7 @@ def stats_in_frame(df: pd.DataFrame, save: bool = False) -> pd.DataFrame:
         Returns: calculated_stats_df (DataFrame)
     """
 
+    # why adding func in func when outer func does not affect inner func? Maybe just add save option
     def anscombe_statistics(a: list, b: list, round_it: int = 2) -> list:
         """
         Calculates variance, mean, standard deviation and pearson correlation.
@@ -144,6 +146,7 @@ def sets_regplot(df: pd.DataFrame, save: bool = False) -> plt:
         Returns: plot (plt)
     """
 
+    # Try loop stay DRY ;)
     fig, axes = plt.subplots(2, 2, figsize=(9.125, 9), sharex="all", sharey="all")
     plt.suptitle("Regression plot for Anscombe's quartet.")
 
