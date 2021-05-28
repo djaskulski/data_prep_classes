@@ -1,0 +1,13 @@
+name: data_prep_classes
+channels:
+ - conda-forge
+ - defaults
+dependencies:
+ - python == 3.8.5
+ - pandas
+ - altair
+ - altair_saver
+ - seaborn
+ - matplotlib
+ - scipy
+ - pip

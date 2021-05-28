@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[27]:
+# In[46]:
 
 
 # <!-- Yahoo finance (n)
@@ -22,7 +22,7 @@
 #     
 # https://finance.yahoo.com/quote/CSV/history/?guce_referrer=aHR0cHM6Ly93d3cuZ29vZ2xlLmNvbS8&guce_referrer_sig=AQAAAJjgOLcqSa79X2NVcDfaAsiL9BAHg5RvrFg6uir9MoKK8kw1oCE7Io1rINBuyWaJzgkx4TiRiOL_UMQKHk9Lp2Ne9IZ7hwh-3ettI5wsQEvlI2guv04Y0DrmkdAYNKm_baNDrq-DX0kN7r07wdmeKavlvqjoWZWgGPyncARRyqtG&guccounter=2
 
-# In[51]:
+# In[47]:
 
 
 import re
@@ -33,7 +33,7 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 
 
-# In[52]:
+# In[48]:
 
 
 def get_local_csv(path :str = "houses_data.csv") -> pd.DataFrame:
@@ -53,7 +53,7 @@ def get_local_csv(path :str = "houses_data.csv") -> pd.DataFrame:
     return my_data
 
 
-# In[53]:
+# In[49]:
 
 
 def cut_my_df(source: pd.DataFrame, x: str, y: str, y_rolling=False, x_as_index=False) -> pd.DataFrame:
@@ -83,7 +83,7 @@ def cut_my_df(source: pd.DataFrame, x: str, y: str, y_rolling=False, x_as_index=
     return small_df
 
 
-# In[54]:
+# In[50]:
 
 
 def pd_sns_rolling_mean(source: pd.DataFrame, title: str = "title") -> plt:
@@ -109,7 +109,7 @@ def pd_sns_rolling_mean(source: pd.DataFrame, title: str = "title") -> plt:
     return plt.show()
 
 
-# In[64]:
+# In[86]:
 
 
 def alt_rolling_mean(source: pd.DataFrame) -> plt:
@@ -120,6 +120,7 @@ def alt_rolling_mean(source: pd.DataFrame) -> plt:
             source (DataFrame): DataFrame with max 2 columns. One of them must be date. Default = small_df.
         Returns: Plot.
     """
+    
     alt.data_transformers.disable_max_rows()
     
     line = alt.Chart(source).mark_line(
@@ -133,6 +134,7 @@ def alt_rolling_mean(source: pd.DataFrame) -> plt:
         y='rolling_mean:Q'
     )
 
+    
     points = alt.Chart(source).mark_point().encode(
         x='Date:T',
         y=alt.Y('Price:Q',
@@ -140,28 +142,13 @@ def alt_rolling_mean(source: pd.DataFrame) -> plt:
     ).properties(
     width=640,
     height=480)
-
-   
-    line.save('chart.png')
     
-    return points + line
+    plot = line + points
+    
+    return plot.show()
 
 
-# In[65]:
-
-
-var4 = cut_my_df(source=var1, x="Date", y="Price")
-var4
-
-
-# In[66]:
-
-
-var5 = alt_rolling_mean(source=var4)
-var5
-
-
-# In[57]:
+# In[89]:
 
 
 def main():
@@ -170,20 +157,21 @@ def main():
     print(var2)
     var3 = pd_sns_rolling_mean(source=var2, title="Prices of yahoo houses and rolling mean")
     var3
-    
-    
-    
+
+    var4 = cut_my_df(source=var1, x="Date", y="Price")
+    print(var4)
+    alt_rolling_mean(source=var4)
 
 
-# In[58]:
+# In[90]:
 
 
 if __name__ == "__main__":
     main()
 
 
-# In[35]:
+# In[54]:
 
 
-#get_ipython().system('jupyter nbconvert --to python "yahoo_finance.ipynb"')
+# !jupyter nbconvert --to python "yahoo_finance.ipynb"
 
