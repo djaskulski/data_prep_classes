@@ -1,15 +1,13 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[1]:
+# In[68]:
 
 
 import random
 
 
-# # 1. List manipulation
-
-# In[23]:
+# In[69]:
 
 
 def list_manipulator() -> None:
@@ -53,15 +51,7 @@ def list_manipulator() -> None:
         print(i)
 
 
-# In[24]:
-
-
-list_manipulator()
-
-
-# # 2. Tuples
-
-# In[39]:
+# In[70]:
 
 
 def tuple_manipulator() -> None:
@@ -89,15 +79,7 @@ def tuple_manipulator() -> None:
         index_counter += 1
 
 
-# In[40]:
-
-
-tuple_manipulator()
-
-
-# # 3. Sets (unordered & unique data)
-
-# In[51]:
+# In[71]:
 
 
 def sets_manipulator() -> None:
@@ -135,20 +117,25 @@ def sets_manipulator() -> None:
     print("len of differenced: ", len(differenced))
 
 
-# In[52]:
+# In[72]:
 
 
-sets_manipulator()
+def main():
+    
+    list_manipulator()
+    tuple_manipulator()
+    sets_manipulator()
 
 
-# In[55]:
+# In[73]:
 
 
-get_ipython().system('jupyter nbconvert --to python "lists&sets.ipynb"')
+if __name__ == "__main__":
+    main()
 
 
-# In[ ]:
+# In[74]:
 
 
-
+#get_ipython().system('jupyter nbconvert --to python "lists&sets.ipynb"')
 
