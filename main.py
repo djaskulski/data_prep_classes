@@ -1,6 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
 import os
 import numpy as np
 import pandas as pd
@@ -32,6 +29,7 @@ def makedir(name: str = "output") -> None:
     # Maybe add feature to name the directory
     resposne = input(f"Write 'ok' and confirm by hitting ENTER to make {name} dir.\n ")
 
+    # If i don't write ok program will crash because of no 'output folder
     if resposne == "ok":
         try:
             os.makedirs(name)
@@ -188,7 +186,8 @@ def main():
 
     # anscombe's data with simple statistics
     input("Press any key to see data ")
-    my_anscombe_df = data_as_anscombe(multi_index=True, save=True)
+    my_anscombe_df = data_as_anscombe(multi_index=True, save=True)  # if multi index will be False line 105 - 108
+    # will not work
     print(my_anscombe_df)
     my_calculated_stats_df = stats_in_frame(my_anscombe_df, save=True)
     print(my_calculated_stats_df)
