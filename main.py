@@ -74,7 +74,6 @@ def data_as_anscombe(multi_index: bool = True, save: bool = False) -> pd.DataFra
     return anscombe_df
 
 
-# why adding func in func when outer func does not affect inner func? Maybe just add save option
 def anscombe_statistics(a: list, b: list, round_it: int = 2) -> list:
     """
     Calculates variance, mean, standard deviation and pearson correlation.
@@ -126,6 +125,7 @@ def stats_plot(df: pd.DataFrame, save: bool = False) -> plt:
             save (bool): Create csv file with calculated_set_df. (Default: False)
         Returns: plot (plt)
     """
+
     df.plot(kind="bar", figsize=(9.5, 9), grid=True, legend=True,
             title="Simple statistics comparison", rot=0)
 
