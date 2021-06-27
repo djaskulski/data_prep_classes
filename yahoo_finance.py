@@ -1,42 +1,23 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[1]:
-
-
-# <!-- Yahoo finance (n)
+# Yahoo finance (n)
 
 # Proszę wstawić print screen z np. jupyter notebooka, gdzie:
-
 # - będą widoczne 2 wykresy ze średnią ruchomą (pandas, altair)
-
 # - będzie widoczny kod, który wygenerował wykresy.
 
-
 # Nazwa pliku (bez polskich znaków):
+# Nazwisko_Imie_yahoo_niestacj.jpg
 
-# Nazwisko_Imie_yahoo_niestacj.jpg -->
-
-
-# Data:
-#     
+# Data:   
 # https://finance.yahoo.com/quote/CSV/history/?guce_referrer=aHR0cHM6Ly93d3cuZ29vZ2xlLmNvbS8&guce_referrer_sig=AQAAAJjgOLcqSa79X2NVcDfaAsiL9BAHg5RvrFg6uir9MoKK8kw1oCE7Io1rINBuyWaJzgkx4TiRiOL_UMQKHk9Lp2Ne9IZ7hwh-3ettI5wsQEvlI2guv04Y0DrmkdAYNKm_baNDrq-DX0kN7r07wdmeKavlvqjoWZWgGPyncARRyqtG&guccounter=2
 
-# In[2]:
-
-
 import re
-
 import pandas as pd
 import altair as alt
 import seaborn as sns
 import matplotlib.pyplot as plt
 
 
-# In[3]:
-
-
-def get_local_csv(path :str = "houses_data.csv") -> pd.DataFrame:
+def get_local_csv(path :str = "data/houses_data.csv") -> pd.DataFrame:
     """
     Loads csv file and returns it in my_data variable. Displays it's head.
         Parameters:
@@ -52,8 +33,6 @@ def get_local_csv(path :str = "houses_data.csv") -> pd.DataFrame:
         
     return my_data
 
-
-# In[4]:
 
 
 def cut_my_df(source: pd.DataFrame, x: str, y: str, y_rolling=False, x_as_index=False) -> pd.DataFrame:
@@ -83,8 +62,6 @@ def cut_my_df(source: pd.DataFrame, x: str, y: str, y_rolling=False, x_as_index=
     return small_df
 
 
-# In[5]:
-
 
 def pd_sns_rolling_mean(source: pd.DataFrame, title: str = "title") -> plt:
     """ 
@@ -108,8 +85,6 @@ def pd_sns_rolling_mean(source: pd.DataFrame, title: str = "title") -> plt:
     
     return plt.show()
 
-
-# In[6]:
 
 
 def alt_rolling_mean(source: pd.DataFrame) -> plt:
@@ -148,8 +123,6 @@ def alt_rolling_mean(source: pd.DataFrame) -> plt:
     return plot.show()
 
 
-# In[7]:
-
 
 def main():
     var1 = get_local_csv()
@@ -163,15 +136,10 @@ def main():
     alt_rolling_mean(source=var4)
 
 
-# In[8]:
-
 
 if __name__ == "__main__":
     main()
 
 
-# In[9]:
-
-
+# # shell command convert .ipynb to .py
 # !jupyter nbconvert --to python "yahoo_finance.ipynb"
-

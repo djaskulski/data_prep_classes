@@ -1,13 +1,4 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[68]:
-
-
 import random
-
-
-# In[69]:
 
 
 def list_manipulator() -> None:
@@ -51,8 +42,6 @@ def list_manipulator() -> None:
         print(i)
 
 
-# In[70]:
-
 
 def tuple_manipulator() -> None:
     """
@@ -78,8 +67,6 @@ def tuple_manipulator() -> None:
         print(f"Index of {first_el} and {secodn_el} is equal {index_counter}")
         index_counter += 1
 
-
-# In[71]:
 
 
 def sets_manipulator() -> None:
@@ -117,8 +104,6 @@ def sets_manipulator() -> None:
     print("len of differenced: ", len(differenced))
 
 
-# In[72]:
-
 
 def main():
     
@@ -127,15 +112,10 @@ def main():
     sets_manipulator()
 
 
-# In[73]:
-
-
 if __name__ == "__main__":
     main()
 
-
-# In[74]:
-
-
-#get_ipython().system('jupyter nbconvert --to python "lists&sets.ipynb"')
+    
+# # shell command convert .ipynb to .py
+# !jupyter nbconvert --to python "lists&sets.ipynb"
 
